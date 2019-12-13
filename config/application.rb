@@ -36,5 +36,12 @@ module MlgbBackend
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
+
+    config.middleware.insert_before 0, Rack::Cors do
+      allow do
+        origins  'localhost:3000', %r{enigmatic-forest-65615.herokuapp.com}
+        resource '*', headers: :any, methods: [:get, :post, :options, :put]
+      end
+    end
   end
 end
