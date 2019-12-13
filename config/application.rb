@@ -25,6 +25,7 @@ module MlgbBackend
     config.load_defaults 6.0
 
     config.services = config_for(:services)
+    config.autoload_paths += %W(#{config.root}/app/services)
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
