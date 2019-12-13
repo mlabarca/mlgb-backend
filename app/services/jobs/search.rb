@@ -29,7 +29,7 @@ module Jobs
     end
 
     def query
-      params[:q]
+      params[:q] + '_cache'
     end
 
     def cache_key
