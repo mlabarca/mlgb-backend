@@ -1,0 +1,11 @@
+default: &default
+  gb_endpoint: 'https://www.getonbrd.com/search/jobs?q='
+
+development:
+  <<: *default
+
+test:
+  <<: *default
+
+production:
+  <<: *default
