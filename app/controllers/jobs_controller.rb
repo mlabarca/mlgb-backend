@@ -8,6 +8,6 @@ class JobsController < ApplicationController
   private
 
   def allowed_params
-    params.permit(:q, :cookie).to_h
+    params.permit(:q, :email).to_h
   end
 end

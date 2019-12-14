@@ -32,6 +32,10 @@ module Jobs
       params[:q]
     end
 
+    def email
+      params[:email]
+    end
+
     def cache_key
       query + '_cache'
     end
