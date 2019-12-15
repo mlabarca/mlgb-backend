@@ -11,8 +11,8 @@ module Jobs
 
     def execute
       {
-        jobs:         job_results,
-        total_docs:   job_results.count
+        jobs:         decorated_results,
+        total_docs:   decorated_results.count
       }
     end
 
@@ -21,15 +21,17 @@ module Jobs
     attr_reader :params
 
     def job_results
-      @job_results ||= begin
-        Rails.cache.fetch(cache_key, expires_in: CACHE_HOURS.hours) do
-          GetOnBoard::FetchJobs.execute(query)
-        end
+      Rails.cache.fetch(cache_key, expires_in: CACHE_HOURS.hours) do
+        GetOnBoard::FetchJobs.execute(query)
       end
     end
 
+    def decorated_results
+      @decorated_results ||= Jobs::Decorate.execute(job_results, email)
+    end
+
     def query
-      params[:q]
+      params[:q] || ''
     end
 
     def email
